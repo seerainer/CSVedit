@@ -411,7 +411,7 @@ Integration Tests (36):
 |------------|---------|
 | **Java 25** | Core language with modern features |
 | **SWT** | Native UI framework (Eclipse Standard Widget Toolkit) |
-| **CSVParser v0.1.3** | Robust, configurable CSV parsing |
+| **CSVParser v0.2.1** | Robust, configurable CSV parsing |
 | **JUnit Jupiter 6.0.0** | Modern testing framework |
 | **AssertJ 3.27.6** | Fluent test assertions |
 | **GraalVM** | Native image compilation support |
