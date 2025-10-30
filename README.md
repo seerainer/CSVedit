@@ -7,7 +7,7 @@
 ![Java](https://img.shields.io/badge/Java-25-orange?style=flat-square&logo=openjdk)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 ![Tests](https://img.shields.io/badge/Tests-60%20Passing-success?style=flat-square)
-![Version](https://img.shields.io/badge/Version-0.1.0-green?style=flat-square)
+![Version](https://img.shields.io/badge/Version-0.1.1-green?style=flat-square)
 
 [Features](#features) • [Installation](#installation) • [Usage](#usage) • [Documentation](#documentation) • [Architecture](#architecture)
 
@@ -415,7 +415,7 @@ Integration Tests (36):
 | **JUnit Jupiter 6.0.0** | Modern testing framework |
 | **AssertJ 3.27.6** | Fluent test assertions |
 | **GraalVM** | Native image compilation support |
-| **Gradle 9.1.0** | Build automation & dependency management |
+| **Gradle 9.2.0** | Build automation & dependency management |
 
 ---
 

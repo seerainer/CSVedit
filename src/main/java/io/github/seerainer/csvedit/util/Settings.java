@@ -131,7 +131,7 @@ public class Settings {
     }
 
     public static int getInitialBufferSize() {
-	return prefs.getInt(KEY_INITIAL_BUFFER_SIZE, 4096);
+	return prefs.getInt(KEY_INITIAL_BUFFER_SIZE, 8192);
     }
 
     public static String getLineEnding() {

@@ -430,8 +430,7 @@ public class MainWindow {
 	final var newText = dialog.getNewHeaderText();
 	column.setText(newText);
 	model.setHeader(columnIndex, newText);
-	undoRedoManager.recordAction(new UndoRedoManager.EditAction(UndoRedoManager.ActionType.HEADER_EDIT, columnIndex,
-		currentText, newText, true));
+	undoRedoManager.recordAction(new UndoRedoManager.EditAction(columnIndex, currentText, newText, true));
 	updateUndoRedoMenuItems();
 	markDirty();
     }
