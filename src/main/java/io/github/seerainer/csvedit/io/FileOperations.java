@@ -24,19 +24,13 @@ public class FileOperations {
      * Loads a CSV file into the model (supports both regular and gzipped files)
      */
     public static void loadCSV(final String filePath, final CSVTableModel model) throws IOException {
-	try {
-	    final var parsed = isGzipFile(filePath) ? CSVParserUtil.parseGzipCSVFile(filePath)
-		    : CSVParserUtil.parseCSVFile(filePath);
+	final var parsed = isGzipFile(filePath) ? CSVParserUtil.parseGzipCSVFile(filePath)
+		: CSVParserUtil.parseCSVFile(filePath);
 
-	    model.clear();
-	    model.setHeaders(parsed.getHeaders());
-	    model.setData(parsed.getData());
-	    model.normalize(); // Ensure all rows have the same number of columns
-	} catch (final IOException e) {
-	    throw e;
-	} catch (final Exception e) {
-	    throw new IOException("An error occurred while loading the CSV file: " + e.getMessage(), e);
-	}
+	model.clear();
+	model.setHeaders(parsed.getHeaders());
+	model.setData(parsed.getData());
+	model.normalize(); // Ensure all rows have the same number of columns
     }
 
     /**

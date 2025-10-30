@@ -173,7 +173,7 @@ public class CSVTableModel {
      * Sets a value at the specified row and column
      */
     public void setValue(final int row, final int col, final String value) {
-	if (((row < 0) || (row >= data.size()))) {
+	if (row < 0 || row >= data.size()) {
 	    return;
 	}
 	final var rowData = data.get(row);

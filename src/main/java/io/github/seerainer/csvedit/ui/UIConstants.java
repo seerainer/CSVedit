@@ -23,7 +23,7 @@ public final class UIConstants {
     public static final long LARGE_FILE_THRESHOLD_BYTES = 10 * 1024 * 1024; // 10MB
 
     // Undo/Redo management
-    public static final int MAX_UNDO_STACK_SIZE = 1000;
+    public static final int MAX_UNDO_STACK_SIZE = 100;
 
     // UI spacing and padding
     public static final int COLUMN_INDEX_WIDTH = 60;
