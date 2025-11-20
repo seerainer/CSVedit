@@ -133,10 +133,8 @@ public class UndoRedoManager {
 	    this.columnData = columnData != null ? new ArrayList<>(columnData) : null;
 	}
 
-	/**
-	 * @param isHeaderEdit dummy parameter to differentiate constructor
-	 */
-	public EditAction(final int col, final String oldHeader, final String newHeader, final boolean isHeaderEdit) {
+	// Header edit action
+	public EditAction(final int col, final String oldHeader, final String newHeader) {
 	    this.type = ActionType.HEADER_EDIT;
 	    this.row = -1;
 	    this.col = col;

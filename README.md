@@ -7,7 +7,7 @@
 ![Java](https://img.shields.io/badge/Java-25-orange?style=flat-square&logo=openjdk)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 ![Tests](https://img.shields.io/badge/Tests-60%20Passing-success?style=flat-square)
-![Version](https://img.shields.io/badge/Version-0.1.1-green?style=flat-square)
+![Version](https://img.shields.io/badge/Version-0.1.2-green?style=flat-square)
 
 [Features](#features) • [Installation](#installation) • [Usage](#usage) • [Documentation](#documentation) • [Architecture](#architecture)
 
@@ -118,7 +118,7 @@ The project declares its dependencies in `build.gradle`. Below are the main runt
   - SWT (GUI): `org.eclipse.platform:org.eclipse.swt.<platform>:3.131.0` (platform-specific artifact is selected dynamically in `build.gradle` via `detectSwtArtifact()`; the artifact suffix depends on OS and architecture)
 
 - Test
-  - JUnit Jupiter: `org.junit.jupiter:junit-jupiter:6.0.0`
+  - JUnit Jupiter: `org.junit.jupiter:junit-jupiter:6.0.1`
   - AssertJ (assertions): `org.assertj:assertj-core:3.27.6`
 
 ---
@@ -376,7 +376,6 @@ Integration Tests (36):
 - 📝 Whole word matching
 - 🔄 Find Next / Replace / Replace All
 - 🎯 Cell-by-cell navigation
-- 🌟 Regex support (in progress)
 
 ### 🔄 Duplicate Row Detection
 - 📊 Scan entire dataset for duplicates
@@ -412,10 +411,10 @@ Integration Tests (36):
 | **Java 25** | Core language with modern features |
 | **SWT** | Native UI framework (Eclipse Standard Widget Toolkit) |
 | **CSVParser v0.2.1** | Robust, configurable CSV parsing |
-| **JUnit Jupiter 6.0.0** | Modern testing framework |
+| **JUnit Jupiter 6.0.1** | Modern testing framework |
 | **AssertJ 3.27.6** | Fluent test assertions |
 | **GraalVM** | Native image compilation support |
-| **Gradle 9.2.0** | Build automation & dependency management |
+| **Gradle 9.2.1** | Build automation & dependency management |
 
 ---
 
