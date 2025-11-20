@@ -71,7 +71,7 @@ public class MainWindow {
 	this.display = display;
 	this.model = new CSVTableModel();
 	this.undoRedoManager = new UndoRedoManager();
-	this.themeManager = new ThemeManager(display);
+	this.themeManager = new ThemeManager();
 
 	themeManager.applyToDisplay(display);
 	Icons.initialize(display);
@@ -96,7 +96,6 @@ public class MainWindow {
 
 	shell.setSize(UIConstants.DEFAULT_WINDOW_WIDTH, UIConstants.DEFAULT_WINDOW_HEIGHT);
 	shell.addDisposeListener(_ -> {
-	    themeManager.dispose();
 	    if (cellEditor != null) {
 		cellEditor.dispose();
 	    }
@@ -430,7 +429,7 @@ public class MainWindow {
 	final var newText = dialog.getNewHeaderText();
 	column.setText(newText);
 	model.setHeader(columnIndex, newText);
-	undoRedoManager.recordAction(new UndoRedoManager.EditAction(columnIndex, currentText, newText, true));
+	undoRedoManager.recordAction(new UndoRedoManager.EditAction(columnIndex, currentText, newText));
 	updateUndoRedoMenuItems();
 	markDirty();
     }

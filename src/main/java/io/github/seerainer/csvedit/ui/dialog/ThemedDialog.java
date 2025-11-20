@@ -25,7 +25,7 @@ abstract class ThemedDialog {
      */
     protected ThemedDialog(final Shell parent, final int style) {
 	this.parentShell = parent;
-	this.themeManager = new ThemeManager(parent.getDisplay());
+	this.themeManager = new ThemeManager();
 	this.shell = new Shell(parent, style);
 	setupTheming();
     }
@@ -55,6 +55,5 @@ abstract class ThemedDialog {
     private void setupTheming() {
 	shell.setBackgroundMode(SWT.INHERIT_FORCE);
 	themeManager.applyToControl(shell);
-	shell.addDisposeListener(_ -> themeManager.dispose());
     }
 }

@@ -17,11 +17,11 @@ public class ThemeManager {
     private final Color darkBack2;
     private final Color darkFore;
 
-    public ThemeManager(final Display display) {
-	this.darkHead = new Color(display, 60, 60, 60);
-	this.darkBack = new Color(display, 48, 48, 48);
-	this.darkBack2 = new Color(display, 36, 36, 36);
-	this.darkFore = new Color(display, 255, 255, 255);
+    public ThemeManager() {
+	this.darkHead = new Color(60, 60, 60);
+	this.darkBack = new Color(48, 48, 48);
+	this.darkBack2 = new Color(36, 36, 36);
+	this.darkFore = new Color(255, 255, 255);
     }
 
     public static boolean isDarkTheme() {
@@ -53,13 +53,6 @@ public class ThemeManager {
 	display.setData("org.eclipse.swt.internal.win32.menuBarBackgroundColor", darkBack);
 	display.setData("org.eclipse.swt.internal.win32.Combo.useDarkTheme", Boolean.TRUE);
 	display.setData("org.eclipse.swt.internal.win32.Text.useDarkThemeIcons", Boolean.TRUE);
-    }
-
-    public void dispose() {
-	darkHead.dispose();
-	darkBack.dispose();
-	darkBack2.dispose();
-	darkFore.dispose();
     }
 
     public Color getDarkBack() {
