@@ -21,7 +21,7 @@ repositories {
 }
 
 ext {
-    swtVersion = '3.131.0'
+    swtVersion = '3.132.0'
     swtArtifact = 'org.eclipse.swt.'
     os = System.getProperty("os.name").toLowerCase()
     arch = System.getProperty("os.arch").toLowerCase()
