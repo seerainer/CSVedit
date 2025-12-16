@@ -9,7 +9,7 @@
 ![Tests](https://img.shields.io/badge/Tests-60%20Passing-success?style=flat-square)
 ![Version](https://img.shields.io/badge/Version-0.1.2-green?style=flat-square)
 
-[Features](#features) • [Installation](#installation) • [Usage](#usage) • [Documentation](#documentation) • [Architecture](#architecture)
+[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Architecture](#%EF%B8%8F-architecture) • [Documentation](#-documentation)
 
 </div>
 
