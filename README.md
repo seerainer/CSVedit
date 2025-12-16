@@ -115,7 +115,7 @@ The project declares its dependencies in `build.gradle`. Below are the main runt
   - Java: Java 25 (configured via Gradle toolchain)
   - CSV parsing library: `com.github.seerainer:CSVparser:0.2.1`
   - JSON utilities: `com.grack:nanojson:1.10`
-  - SWT (GUI): `org.eclipse.platform:org.eclipse.swt.<platform>:3.131.0` (platform-specific artifact is selected dynamically in `build.gradle` via `detectSwtArtifact()`; the artifact suffix depends on OS and architecture)
+  - SWT (GUI): `org.eclipse.platform:org.eclipse.swt.<platform>:3.132.0` (platform-specific artifact is selected dynamically in `build.gradle` via `detectSwtArtifact()`; the artifact suffix depends on OS and architecture)
 
 - Test
   - JUnit Jupiter: `org.junit.jupiter:junit-jupiter:6.0.1`
