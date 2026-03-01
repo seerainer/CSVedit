@@ -14,14 +14,15 @@ public class ThemeManager {
 
     private final Color darkHead;
     private final Color darkBack;
-    private final Color darkBack2;
     private final Color darkFore;
+    private final Color evenRow;
 
     public ThemeManager() {
-	this.darkHead = new Color(60, 60, 60);
+	this.darkHead = new Color(64, 64, 64);
 	this.darkBack = new Color(48, 48, 48);
-	this.darkBack2 = new Color(36, 36, 36);
 	this.darkFore = new Color(255, 255, 255);
+	final var color = DARK_THEME ? 32 : 238;
+	this.evenRow = new Color(color, color, color);
     }
 
     public static boolean isDarkTheme() {
@@ -59,16 +60,12 @@ public class ThemeManager {
 	return darkBack;
     }
 
-    public Color getDarkBack2() {
-	return darkBack2;
-    }
-
     public Color getDarkFore() {
 	return darkFore;
     }
 
-    public Color getDarkHead() {
-	return darkHead;
+    public Color getEvenRow() {
+	return evenRow;
     }
 
     private static boolean getPlatform(final String platform) {

@@ -6,8 +6,8 @@
 
 ![Java](https://img.shields.io/badge/Java-25-orange?style=flat-square&logo=openjdk)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
-![Tests](https://img.shields.io/badge/Tests-60%20Passing-success?style=flat-square)
-![Version](https://img.shields.io/badge/Version-0.1.2-green?style=flat-square)
+![Tests](https://img.shields.io/badge/Tests-83%20Passing-success?style=flat-square)
+![Version](https://img.shields.io/badge/Version-0.2.0-green?style=flat-square)
 
 [Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Architecture](#%EF%B8%8F-architecture) • [Documentation](#-documentation)
 
@@ -118,8 +118,8 @@ The project declares its dependencies in `build.gradle`. Below are the main runt
   - SWT (GUI): `org.eclipse.platform:org.eclipse.swt.<platform>:3.132.0` (platform-specific artifact is selected dynamically in `build.gradle` via `detectSwtArtifact()`; the artifact suffix depends on OS and architecture)
 
 - Test
-  - JUnit Jupiter: `org.junit.jupiter:junit-jupiter:6.0.1`
-  - AssertJ (assertions): `org.assertj:assertj-core:3.27.6`
+  - JUnit Jupiter: `org.junit.jupiter:junit-jupiter:6.0.3`
+  - AssertJ (assertions): `org.assertj:assertj-core:3.27.7`
 
 ---
 
@@ -145,6 +145,8 @@ The project declares its dependencies in `build.gradle`. Below are the main runt
 | ➕ Add Row | `Ctrl+R` | Insert new row |
 | ➕ Add Column | `Ctrl+L` | Insert new column |
 | ❌ Delete Row | `Ctrl+D` | Delete selected row |
+| ⬆️ Move Row Up | `Ctrl+Up` | Move selected row up |
+| ⬇️ Move Row Down | `Ctrl+Down` | Move selected row down |
 | 🔍 Find | `Ctrl+F` | Open search dialog |
 | 📝 Text Editor | `Ctrl+T` | Edit as plain text |
 | 🔄 Refresh | `F5` | Refresh display |
@@ -175,6 +177,8 @@ CSVedit can open and save gzip-compressed CSV files using the `.csv.gz` extensio
 - **Add Column** (`Ctrl+L`) - Add a new column to the table
 - **Delete Row** (`Ctrl+D`) - Delete the selected row
 - **Delete Column** - Remove the last column
+- **Move Row Up** (`Ctrl+Up`) - Move selected row up one position
+- **Move Row Down** (`Ctrl+Down`) - Move selected row down one position
 - **Find** (`Ctrl+F`) - Search for text in the table
 
 ### 👁️ View Menu
@@ -296,17 +300,9 @@ CSVedit can open and save gzip-compressed CSV files using the `.csv.gz` extensio
 ### ✅ Test Coverage
 
 ```
-📊 Total Tests: 60
-✅ Passing: 60 (100%)
+📊 Total Tests: 83
+✅ Passing: 83 (100%)
 ❌ Failing: 0
-
-Unit Tests (24):
-  ✓ CSVTableModelTest - Data model operations
-  ✓ CSVParserCallbackTest - Callback-based CSV parsing
-
-Integration Tests (36):
-  ✓ FileOperationsTest - File I/O operations
-  ✓ TextEditorDialogTest - Text editor/preview behavior
 ```
 
 ### 🧪 Running Tests
@@ -411,10 +407,10 @@ Integration Tests (36):
 | **Java 25** | Core language with modern features |
 | **SWT** | Native UI framework (Eclipse Standard Widget Toolkit) |
 | **CSVParser v0.2.1** | Robust, configurable CSV parsing |
-| **JUnit Jupiter 6.0.1** | Modern testing framework |
-| **AssertJ 3.27.6** | Fluent test assertions |
+| **JUnit Jupiter 6.0.3** | Modern testing framework |
+| **AssertJ 3.27.7** | Fluent test assertions |
 | **GraalVM** | Native image compilation support |
-| **Gradle 9.2.1** | Build automation & dependency management |
+| **Gradle 9.3.1** | Build automation & dependency management |
 
 ---
 

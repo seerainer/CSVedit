@@ -2,11 +2,11 @@ plugins {
     id 'java'
     id 'eclipse'
     id 'application'
-    id 'org.graalvm.buildtools.native' version '0.11.3'
+    id 'org.graalvm.buildtools.native' version '0.11.4'
 }
 
 group = 'io.github.seerainer.csvedit'
-version = '0.1.2'
+version = '0.2.0'
 
 java {
     toolchain {
@@ -68,8 +68,8 @@ dependencies {
         exclude group: 'org.eclipse.platform', module: 'org.eclipse.swt'
     }
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.1'
-    testImplementation 'org.assertj:assertj-core:3.27.6'
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.3'
+    testImplementation 'org.assertj:assertj-core:3.27.7'
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

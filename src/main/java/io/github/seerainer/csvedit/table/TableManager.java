@@ -62,8 +62,8 @@ public class TableManager {
 
 	// Apply alternating row background
 	final var rowIndex = table.getItemCount() - 1;
-	if (ThemeManager.isDarkTheme() && rowIndex % 2 == 0) {
-	    item.setBackground(themeManager.getDarkBack2());
+	if (rowIndex % 2 == 0) {
+	    item.setBackground(themeManager.getEvenRow());
 	}
     }
 
@@ -81,6 +81,143 @@ public class TableManager {
 	}
 	model.removeRow(rowIndex);
 	table.remove(rowIndex);
+    }
+
+    public boolean moveRow(final int fromIndex, final int toIndex) {
+	if (fromIndex < 0 || fromIndex >= table.getItemCount() || toIndex < 0 || toIndex >= table.getItemCount()
+		|| fromIndex == toIndex) {
+	    return false;
+	}
+
+	// Move in model
+	if (!model.moveRow(fromIndex, toIndex)) {
+	    return false;
+	}
+
+	table.setRedraw(false);
+	try {
+	    // Move in UI
+	    final var items = table.getItems();
+	    final var fromItem = items[fromIndex];
+
+	    // Save the data from the source row
+	    final var columnCount = table.getColumnCount();
+	    final var rowData = new String[columnCount];
+	    for (var i = 0; i < columnCount; i++) {
+		rowData[i] = fromItem.getText(i);
+	    }
+	    final var background = fromItem.getBackground();
+
+	    // Remove the source row
+	    table.remove(fromIndex);
+
+	    // Create new item at target position
+	    final var newItem = new TableItem(table, SWT.NONE, toIndex);
+	    for (var i = 0; i < columnCount; i++) {
+		newItem.setText(i, rowData[i]);
+	    }
+	    newItem.setBackground(background);
+
+	    // Reselect the moved row
+	    table.setSelection(toIndex);
+
+	    return true;
+	} finally {
+	    table.setRedraw(true);
+	}
+    }
+
+    public boolean moveRowUp(final int currentIndex) {
+	if (currentIndex <= 0) {
+	    return false;
+	}
+	return moveRow(currentIndex, currentIndex - 1);
+    }
+
+    public boolean moveRowDown(final int currentIndex) {
+	if (currentIndex < 0 || currentIndex >= table.getItemCount() - 1) {
+	    return false;
+	}
+	return moveRow(currentIndex, currentIndex + 1);
+    }
+
+    public boolean moveRowToFirst(final int currentIndex) {
+	// Move in model
+	if (currentIndex <= 0 || currentIndex >= table.getItemCount() || !model.moveRowToFirst(currentIndex)) {
+	    return false;
+	}
+
+	table.setRedraw(false);
+	try {
+	    // Move in UI
+	    final var items = table.getItems();
+	    final var fromItem = items[currentIndex];
+
+	    // Save the data from the source row
+	    final var columnCount = table.getColumnCount();
+	    final var rowData = new String[columnCount];
+	    for (var i = 0; i < columnCount; i++) {
+		rowData[i] = fromItem.getText(i);
+	    }
+	    final var background = fromItem.getBackground();
+
+	    // Remove the source row
+	    table.remove(currentIndex);
+
+	    // Create new item at first position
+	    final var newItem = new TableItem(table, SWT.NONE, 0);
+	    for (var i = 0; i < columnCount; i++) {
+		newItem.setText(i, rowData[i]);
+	    }
+	    newItem.setBackground(background);
+
+	    // Reselect the moved row
+	    table.setSelection(0);
+
+	    return true;
+	} finally {
+	    table.setRedraw(true);
+	}
+    }
+
+    public boolean moveRowToLast(final int currentIndex) {
+	// Move in model
+	if (currentIndex < 0 || currentIndex >= table.getItemCount() - 1 || !model.moveRowToLast(currentIndex)) {
+	    return false;
+	}
+
+	table.setRedraw(false);
+	try {
+	    // Move in UI
+	    final var items = table.getItems();
+	    final var fromItem = items[currentIndex];
+
+	    // Save the data from the source row
+	    final var columnCount = table.getColumnCount();
+	    final var rowData = new String[columnCount];
+	    for (var i = 0; i < columnCount; i++) {
+		rowData[i] = fromItem.getText(i);
+	    }
+	    final var background = fromItem.getBackground();
+
+	    // Remove the source row
+	    table.remove(currentIndex);
+
+	    // Create new item at last position
+	    final var lastIndex = table.getItemCount();
+	    final var newItem = new TableItem(table, SWT.NONE, lastIndex);
+	    for (var i = 0; i < columnCount; i++) {
+		newItem.setText(i, rowData[i]);
+	    }
+	    newItem.setBackground(background);
+
+	    // Reselect the moved row
+	    table.setSelection(lastIndex);
+
+	    return true;
+	} finally {
+	    table.setRedraw(true);
+	}
     }
 
     public void initializeEmptyTable(final Listener sortListener, final Listener editHeaderListener) {
@@ -117,14 +254,13 @@ public class TableManager {
 	    }
 
 	    // Apply alternating row background
-	    if (ThemeManager.isDarkTheme() && i % 2 == 0) {
-		item.setBackground(themeManager.getDarkBack2());
+	    if (i % 2 == 0) {
+		item.setBackground(themeManager.getEvenRow());
 	    }
 	}
     }
 
     public void refreshTable(final Listener sortListener, final Listener editHeaderListener) {
-	// Disable redraw during bulk updates for better performance
 	table.setRedraw(false);
 	try {
 	    // Save the current column order before removing columns
@@ -172,12 +308,11 @@ public class TableManager {
 		}
 
 		// Apply alternating row background
-		if (ThemeManager.isDarkTheme() && i % 2 == 0) {
-		    items[i].setBackground(themeManager.getDarkBack2());
+		if (i % 2 == 0) {
+		    items[i].setBackground(themeManager.getEvenRow());
 		}
 	    }
 	} finally {
-	    // Always re-enable redraw
 	    table.setRedraw(true);
 	}
     }

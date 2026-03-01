@@ -144,6 +144,53 @@ public class CSVTableModel {
     }
 
     /**
+     * Moves a row from one position to another
+     *
+     * @param fromIndex the current position of the row
+     * @param toIndex   the target position for the row
+     * @return true if the move was successful, false otherwise
+     */
+    public boolean moveRow(final int fromIndex, final int toIndex) {
+	if (fromIndex < 0 || fromIndex >= data.size() || toIndex < 0 || toIndex >= data.size()
+		|| fromIndex == toIndex) {
+	    return false;
+	}
+	final var row = data.remove(fromIndex);
+	data.add(toIndex, row);
+	return true;
+    }
+
+    /**
+     * Moves a row to the first position
+     *
+     * @param fromIndex the current position of the row
+     * @return true if the move was successful, false otherwise
+     */
+    public boolean moveRowToFirst(final int fromIndex) {
+	if (fromIndex < 0 || fromIndex >= data.size() || fromIndex == 0) {
+	    return false;
+	}
+	final var row = data.remove(fromIndex);
+	data.add(0, row);
+	return true;
+    }
+
+    /**
+     * Moves a row to the last position
+     *
+     * @param fromIndex the current position of the row
+     * @return true if the move was successful, false otherwise
+     */
+    public boolean moveRowToLast(final int fromIndex) {
+	if (fromIndex < 0 || fromIndex >= data.size() || fromIndex == data.size() - 1) {
+	    return false;
+	}
+	final var row = data.remove(fromIndex);
+	data.add(row);
+	return true;
+    }
+
+    /**
      * Sets all data at once
      */
     public void setData(final List<List<String>> newData) {

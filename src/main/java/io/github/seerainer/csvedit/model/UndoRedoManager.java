@@ -79,7 +79,7 @@ public class UndoRedoManager {
     }
 
     public enum ActionType {
-	CELL_EDIT, ROW_ADD, ROW_DELETE, COLUMN_ADD, COLUMN_DELETE, HEADER_EDIT
+	CELL_EDIT, ROW_ADD, ROW_DELETE, ROW_MOVE, COLUMN_ADD, COLUMN_DELETE, HEADER_EDIT
     }
 
     /**
@@ -94,6 +94,8 @@ public class UndoRedoManager {
 	private final List<String> rowData;
 	private final String columnHeader;
 	private final List<String> columnData;
+	private final int fromIndex;
+	private final int toIndex;
 
 	// Cell edit action
 	public EditAction(final ActionType type, final int row, final int col, final String oldValue,
@@ -106,6 +108,8 @@ public class UndoRedoManager {
 	    this.rowData = null;
 	    this.columnHeader = null;
 	    this.columnData = null;
+	    this.fromIndex = -1;
+	    this.toIndex = -1;
 	}
 
 	// Row add/delete action
@@ -118,6 +122,22 @@ public class UndoRedoManager {
 	    this.rowData = new ArrayList<>(rowData);
 	    this.columnHeader = null;
 	    this.columnData = null;
+	    this.fromIndex = -1;
+	    this.toIndex = -1;
+	}
+
+	// Row move action
+	public EditAction(final ActionType type, final int fromIndex, final int toIndex) {
+	    this.type = type;
+	    this.row = -1;
+	    this.col = -1;
+	    this.oldValue = null;
+	    this.newValue = null;
+	    this.rowData = null;
+	    this.columnHeader = null;
+	    this.columnData = null;
+	    this.fromIndex = fromIndex;
+	    this.toIndex = toIndex;
 	}
 
 	// Column add/delete action
@@ -131,6 +151,8 @@ public class UndoRedoManager {
 	    this.rowData = null;
 	    this.columnHeader = columnHeader;
 	    this.columnData = columnData != null ? new ArrayList<>(columnData) : null;
+	    this.fromIndex = -1;
+	    this.toIndex = -1;
 	}
 
 	// Header edit action
@@ -143,6 +165,8 @@ public class UndoRedoManager {
 	    this.rowData = null;
 	    this.columnHeader = null;
 	    this.columnData = null;
+	    this.fromIndex = -1;
+	    this.toIndex = -1;
 	}
 
 	public int getCol() {
@@ -175,6 +199,14 @@ public class UndoRedoManager {
 
 	public ActionType getType() {
 	    return type;
+	}
+
+	public int getFromIndex() {
+	    return fromIndex;
+	}
+
+	public int getToIndex() {
+	    return toIndex;
 	}
     }
 }
