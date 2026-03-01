@@ -231,4 +231,101 @@ class CSVTableModelTest {
 	assertThat(model.getValue(0, 3)).isEqualTo("D");
 	assertThat(model.getValue(0, 2)).isEmpty();
     }
+
+    @Test
+    void testMoveRow() {
+	model.addRow(List.of("1", "2"));
+	model.addRow(List.of("3", "4"));
+	model.addRow(List.of("5", "6"));
+
+	final var result = model.moveRow(0, 2);
+
+	assertThat(result).isTrue();
+	assertThat(model.getRow(0)).containsExactly("3", "4");
+	assertThat(model.getRow(1)).containsExactly("5", "6");
+	assertThat(model.getRow(2)).containsExactly("1", "2");
+    }
+
+    @Test
+    void testMoveRow_sameIndex_returnsFalse() {
+	model.addRow(List.of("1", "2"));
+	model.addRow(List.of("3", "4"));
+
+	final var result = model.moveRow(1, 1);
+
+	assertThat(result).isFalse();
+    }
+
+    @Test
+    void testMoveRow_invalidIndex_returnsFalse() {
+	model.addRow(List.of("1", "2"));
+
+	assertThat(model.moveRow(-1, 0)).isFalse();
+	assertThat(model.moveRow(0, 5)).isFalse();
+	assertThat(model.moveRow(5, 0)).isFalse();
+    }
+
+    @Test
+    void testMoveRowToFirst() {
+	model.addRow(List.of("1", "2"));
+	model.addRow(List.of("3", "4"));
+	model.addRow(List.of("5", "6"));
+
+	final var result = model.moveRowToFirst(2);
+
+	assertThat(result).isTrue();
+	assertThat(model.getRow(0)).containsExactly("5", "6");
+	assertThat(model.getRow(1)).containsExactly("1", "2");
+	assertThat(model.getRow(2)).containsExactly("3", "4");
+    }
+
+    @Test
+    void testMoveRowToFirst_alreadyAtFirst_returnsFalse() {
+	model.addRow(List.of("1", "2"));
+	model.addRow(List.of("3", "4"));
+
+	final var result = model.moveRowToFirst(0);
+
+	assertThat(result).isFalse();
+    }
+
+    @Test
+    void testMoveRowToFirst_invalidIndex_returnsFalse() {
+	model.addRow(List.of("1", "2"));
+
+	assertThat(model.moveRowToFirst(-1)).isFalse();
+	assertThat(model.moveRowToFirst(5)).isFalse();
+    }
+
+    @Test
+    void testMoveRowToLast() {
+	model.addRow(List.of("1", "2"));
+	model.addRow(List.of("3", "4"));
+	model.addRow(List.of("5", "6"));
+
+	final var result = model.moveRowToLast(0);
+
+	assertThat(result).isTrue();
+	assertThat(model.getRow(0)).containsExactly("3", "4");
+	assertThat(model.getRow(1)).containsExactly("5", "6");
+	assertThat(model.getRow(2)).containsExactly("1", "2");
+    }
+
+    @Test
+    void testMoveRowToLast_alreadyAtLast_returnsFalse() {
+	model.addRow(List.of("1", "2"));
+	model.addRow(List.of("3", "4"));
+
+	final var result = model.moveRowToLast(1);
+
+	assertThat(result).isFalse();
+    }
+
+    @Test
+    void testMoveRowToLast_invalidIndex_returnsFalse() {
+	model.addRow(List.of("1", "2"));
+
+	assertThat(model.moveRowToLast(-1)).isFalse();
+	assertThat(model.moveRowToLast(5)).isFalse();
+    }
 }

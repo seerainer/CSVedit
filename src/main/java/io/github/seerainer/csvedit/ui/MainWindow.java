@@ -103,6 +103,13 @@ public class MainWindow {
 		tableFont.dispose();
 	    }
 	});
+	shell.addListener(SWT.Close, event -> {
+	    if (confirmDiscardChanges()) {
+		Icons.dispose();
+	    } else {
+		event.doit = false;
+	    }
+	});
 	shell.open();
 
 	if (arg != null && !arg.isBlank()) {
@@ -211,6 +218,36 @@ public class MainWindow {
 
 	separator(editMenu);
 
+	final var moveRowMenuItem = new MenuItem(editMenu, SWT.CASCADE);
+	moveRowMenuItem.setText("&Move Row");
+
+	final var moveRowMenu = new Menu(shell, SWT.DROP_DOWN);
+	moveRowMenuItem.setMenu(moveRowMenu);
+
+	final var moveRowUpItem = new MenuItem(moveRowMenu, SWT.PUSH);
+	moveRowUpItem.setText("Move &Up\tCtrl+Up");
+	moveRowUpItem.setAccelerator(SWT.MOD1 + SWT.ARROW_UP);
+	moveRowUpItem.addSelectionListener(widgetSelectedAdapter(_ -> handleMoveRowUp()));
+
+	final var moveRowDownItem = new MenuItem(moveRowMenu, SWT.PUSH);
+	moveRowDownItem.setText("Move &Down\tCtrl+Down");
+	moveRowDownItem.setAccelerator(SWT.MOD1 + SWT.ARROW_DOWN);
+	moveRowDownItem.addSelectionListener(widgetSelectedAdapter(_ -> handleMoveRowDown()));
+
+	separator(moveRowMenu);
+
+	final var moveRowToFirstItem = new MenuItem(moveRowMenu, SWT.PUSH);
+	moveRowToFirstItem.setText("Move to &First\tCtrl+Home");
+	moveRowToFirstItem.setAccelerator(SWT.MOD1 + SWT.HOME);
+	moveRowToFirstItem.addSelectionListener(widgetSelectedAdapter(_ -> handleMoveRowToFirst()));
+
+	final var moveRowToLastItem = new MenuItem(moveRowMenu, SWT.PUSH);
+	moveRowToLastItem.setText("Move to &Last\tCtrl+End");
+	moveRowToLastItem.setAccelerator(SWT.MOD1 + SWT.END);
+	moveRowToLastItem.addSelectionListener(widgetSelectedAdapter(_ -> handleMoveRowToLast()));
+
+	separator(editMenu);
+
 	final var findItem = new MenuItem(editMenu, SWT.PUSH);
 	findItem.setText("&Find and Replace...\tCtrl+F");
 	findItem.setAccelerator(SWT.MOD1 + 'F');
@@ -293,7 +330,7 @@ public class MainWindow {
 
 	final var exitItem = new MenuItem(fileMenu, SWT.PUSH);
 	exitItem.setText("E&xit");
-	exitItem.addSelectionListener(widgetSelectedAdapter(_ -> handleExit()));
+	exitItem.addSelectionListener(widgetSelectedAdapter(_ -> shell.close()));
     }
 
     private void createHelpMenu(final Menu menuBar) {
@@ -380,6 +417,24 @@ public class MainWindow {
 	final var deleteColumnItem = new MenuItem(contextMenu, SWT.PUSH);
 	deleteColumnItem.setText("Delete Column");
 	deleteColumnItem.addSelectionListener(widgetSelectedAdapter(_ -> handleDeleteColumn()));
+
+	separator(contextMenu);
+
+	final var moveRowUpItem = new MenuItem(contextMenu, SWT.PUSH);
+	moveRowUpItem.setText("Move Row Up");
+	moveRowUpItem.addSelectionListener(widgetSelectedAdapter(_ -> handleMoveRowUp()));
+
+	final var moveRowDownItem = new MenuItem(contextMenu, SWT.PUSH);
+	moveRowDownItem.setText("Move Row Down");
+	moveRowDownItem.addSelectionListener(widgetSelectedAdapter(_ -> handleMoveRowDown()));
+
+	final var moveRowToFirstItem = new MenuItem(contextMenu, SWT.PUSH);
+	moveRowToFirstItem.setText("Move Row to First");
+	moveRowToFirstItem.addSelectionListener(widgetSelectedAdapter(_ -> handleMoveRowToFirst()));
+
+	final var moveRowToLastItem = new MenuItem(contextMenu, SWT.PUSH);
+	moveRowToLastItem.setText("Move Row to Last");
+	moveRowToLastItem.addSelectionListener(widgetSelectedAdapter(_ -> handleMoveRowToLast()));
     }
 
     private void createViewMenu(final Menu menuBar) {
@@ -566,6 +621,105 @@ public class MainWindow {
 	markDirty();
     }
 
+    private void handleMoveRowUp() {
+	final var selectedIndices = table.getSelectionIndices();
+	if (selectedIndices.length == 0) {
+	    dialogHelper.showInfo("No selection", "Please select a row to move.");
+	    return;
+	}
+	if (selectedIndices.length > 1) {
+	    dialogHelper.showInfo("Multiple Selection", "Please select only one row to move.");
+	    return;
+	}
+
+	final var currentIndex = selectedIndices[0];
+	if (currentIndex <= 0) {
+	    return; // Already at the top
+	}
+
+	final var newIndex = currentIndex - 1;
+	if (!tableManager.moveRowUp(currentIndex)) {
+	    return;
+	}
+	undoRedoManager.recordAction(
+		new UndoRedoManager.EditAction(UndoRedoManager.ActionType.ROW_MOVE, currentIndex, newIndex));
+	updateUndoRedoMenuItems();
+	markDirty();
+    }
+
+    private void handleMoveRowDown() {
+	final var selectedIndices = table.getSelectionIndices();
+	if (selectedIndices.length == 0) {
+	    dialogHelper.showInfo("No selection", "Please select a row to move.");
+	    return;
+	}
+	if (selectedIndices.length > 1) {
+	    dialogHelper.showInfo("Multiple Selection", "Please select only one row to move.");
+	    return;
+	}
+
+	final var currentIndex = selectedIndices[0];
+	if (currentIndex >= table.getItemCount() - 1) {
+	    return; // Already at the bottom
+	}
+
+	final var newIndex = currentIndex + 1;
+	if (!tableManager.moveRowDown(currentIndex)) {
+	    return;
+	}
+	undoRedoManager.recordAction(
+		new UndoRedoManager.EditAction(UndoRedoManager.ActionType.ROW_MOVE, currentIndex, newIndex));
+	updateUndoRedoMenuItems();
+	markDirty();
+    }
+
+    private void handleMoveRowToFirst() {
+	final var selectedIndices = table.getSelectionIndices();
+	if (selectedIndices.length == 0) {
+	    dialogHelper.showInfo("No selection", "Please select a row to move.");
+	    return;
+	}
+	if (selectedIndices.length > 1) {
+	    dialogHelper.showInfo("Multiple Selection", "Please select only one row to move.");
+	    return;
+	}
+
+	final var currentIndex = selectedIndices[0];
+	if ((currentIndex <= 0) || !tableManager.moveRowToFirst(currentIndex)) {
+	    return;
+	}
+	undoRedoManager
+		.recordAction(new UndoRedoManager.EditAction(UndoRedoManager.ActionType.ROW_MOVE, currentIndex, 0));
+	updateUndoRedoMenuItems();
+	markDirty();
+    }
+
+    private void handleMoveRowToLast() {
+	final var selectedIndices = table.getSelectionIndices();
+	if (selectedIndices.length == 0) {
+	    dialogHelper.showInfo("No selection", "Please select a row to move.");
+	    return;
+	}
+	if (selectedIndices.length > 1) {
+	    dialogHelper.showInfo("Multiple Selection", "Please select only one row to move.");
+	    return;
+	}
+
+	final var currentIndex = selectedIndices[0];
+	if (currentIndex >= table.getItemCount() - 1) {
+	    return; // Already at the bottom
+	}
+
+	final var lastIndex = table.getItemCount() - 1;
+	if (!tableManager.moveRowToLast(currentIndex)) {
+	    return;
+	}
+	undoRedoManager.recordAction(
+		new UndoRedoManager.EditAction(UndoRedoManager.ActionType.ROW_MOVE, currentIndex, lastIndex));
+	updateUndoRedoMenuItems();
+	markDirty();
+    }
+
     private void handleEditCell() {
 	final var selectedIndex = table.getSelectionIndex();
 	if (selectedIndex < 0) {
@@ -575,14 +729,6 @@ public class MainWindow {
 
 	final var item = table.getItem(selectedIndex);
 	cellEditor.editCell(item, selectedIndex, 0, this::recordCellEdit);
-    }
-
-    private void handleExit() {
-	if (!confirmDiscardChanges()) {
-	    return;
-	}
-	Icons.dispose();
-	shell.close();
     }
 
     private void handleExportJSON() {

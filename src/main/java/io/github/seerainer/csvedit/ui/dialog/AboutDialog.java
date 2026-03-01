@@ -26,8 +26,8 @@ public class AboutDialog extends ThemedDialog {
 
     private static final Random random = new SecureRandom();
     private static final String APP_NAME = "CSV Editor";
-    private static final String VERSION = "0.1.2";
-    private static final String COPYRIGHT = "© 2025  Philipp Seerainer";
+    private static final String VERSION = "0.2.0";
+    private static final String COPYRIGHT = "© 2026  Philipp Seerainer";
     private static final String DESCRIPTION = "A feature-rich CSV (Comma-Separated Values) editor.";
     private final Display display;
     private Canvas canvas;

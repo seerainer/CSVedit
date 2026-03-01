@@ -39,6 +39,13 @@ public class UndoRedoHandler {
 		model.addRow(action.getRowData());
 	    }
 	}
+	case ROW_MOVE -> {
+	    if (isRedo) {
+		model.moveRow(action.getFromIndex(), action.getToIndex());
+	    } else {
+		model.moveRow(action.getToIndex(), action.getFromIndex());
+	    }
+	}
 	case COLUMN_ADD -> {
 	    if (isRedo) {
 		model.addColumn("");
