@@ -64,6 +64,22 @@
       "type": "org.eclipse.swt.dnd.DropTarget$1"
     },
     {
+      "type": "org.eclipse.swt.graphics.TextLayout$1MetaFileEnumProc",
+      "jniAccessible": true,
+      "methods": [
+        {
+          "name": "metaFileEnumProc",
+          "parameterTypes": [
+            "long",
+            "long",
+            "long",
+            "long",
+            "long"
+          ]
+        }
+      ]
+    },
+    {
       "type": "org.eclipse.swt.internal.BidiUtil",
       "jniAccessible": true,
       "methods": [
@@ -868,6 +884,42 @@
       ]
     },
     {
+      "type": "org.eclipse.swt.internal.win32.EMR",
+      "jniAccessible": true,
+      "fields": [
+        {
+          "name": "iType"
+        },
+        {
+          "name": "nSize"
+        }
+      ]
+    },
+    {
+      "type": "org.eclipse.swt.internal.win32.EMREXTCREATEFONTINDIRECTW",
+      "jniAccessible": true,
+      "fields": [
+        {
+          "name": "elfw"
+        },
+        {
+          "name": "emr"
+        },
+        {
+          "name": "ihFont"
+        }
+      ]
+    },
+    {
+      "type": "org.eclipse.swt.internal.win32.EXTLOGFONTW",
+      "jniAccessible": true,
+      "fields": [
+        {
+          "name": "elfLogFont"
+        }
+      ]
+    },
+    {
       "type": "org.eclipse.swt.internal.win32.HDHITTESTINFO",
       "jniAccessible": true,
       "fields": [
@@ -1239,6 +1291,42 @@
         },
         {
           "name": "wID"
+        }
+      ]
+    },
+    {
+      "type": "org.eclipse.swt.internal.win32.MINMAXINFO",
+      "jniAccessible": true,
+      "fields": [
+        {
+          "name": "ptMaxPosition_x"
+        },
+        {
+          "name": "ptMaxPosition_y"
+        },
+        {
+          "name": "ptMaxSize_x"
+        },
+        {
+          "name": "ptMaxSize_y"
+        },
+        {
+          "name": "ptMaxTrackSize_x"
+        },
+        {
+          "name": "ptMaxTrackSize_y"
+        },
+        {
+          "name": "ptMinTrackSize_x"
+        },
+        {
+          "name": "ptMinTrackSize_y"
+        },
+        {
+          "name": "ptReserved_x"
+        },
+        {
+          "name": "ptReserved_y"
         }
       ]
     },
@@ -1762,6 +1850,30 @@
       ]
     },
     {
+      "type": "org.eclipse.swt.internal.win32.SCRIPT_FONTPROPERTIES",
+      "jniAccessible": true,
+      "fields": [
+        {
+          "name": "cBytes"
+        },
+        {
+          "name": "iKashidaWidth"
+        },
+        {
+          "name": "wgBlank"
+        },
+        {
+          "name": "wgDefault"
+        },
+        {
+          "name": "wgInvalid"
+        },
+        {
+          "name": "wgKashida"
+        }
+      ]
+    },
+    {
       "type": "org.eclipse.swt.internal.win32.SCRIPT_ITEM",
       "jniAccessible": true,
       "fields": [
@@ -1770,6 +1882,30 @@
         },
         {
           "name": "iCharPos"
+        }
+      ]
+    },
+    {
+      "type": "org.eclipse.swt.internal.win32.SCRIPT_LOGATTR",
+      "jniAccessible": true,
+      "fields": [
+        {
+          "name": "fCharStop"
+        },
+        {
+          "name": "fInvalid"
+        },
+        {
+          "name": "fReserved"
+        },
+        {
+          "name": "fSoftBreak"
+        },
+        {
+          "name": "fWhiteSpace"
+        },
+        {
+          "name": "fWordStop"
         }
       ]
     },
@@ -2473,9 +2609,6 @@
     },
     {
       "glob": "org/eclipse/swt/internal/SWTMessages_de.properties"
-    },
-    {
-      "glob": "org/eclipse/swt/internal/SWTMessages_de_AT.properties"
     },
     {
       "bundle": "org.eclipse.swt.internal.SWTMessages"

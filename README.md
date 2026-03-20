@@ -410,7 +410,7 @@ CSVedit can open and save gzip-compressed CSV files using the `.csv.gz` extensio
 | **JUnit Jupiter 6.0.3** | Modern testing framework |
 | **AssertJ 3.27.7** | Fluent test assertions |
 | **GraalVM** | Native image compilation support |
-| **Gradle 9.3.1** | Build automation & dependency management |
+| **Gradle 9.4.1** | Build automation & dependency management |
 
 ---
 
